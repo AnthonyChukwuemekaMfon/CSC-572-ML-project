@@ -42,6 +42,25 @@ All models were evaluated on an unseen stratified hold-out test set ($n = 955$, 
 | **Logistic Regression (Baseline)** | 77.07% | **77.88%** | 81.30% | 0.7955 | 0.8250 |
 | **Decision Tree Classifier** | 75.08% | 74.74% | 82.44% | 0.7840 | 0.8018 |
 
+### 📈 Model Evaluation Visualizations
+
+#### Test Set Metrics & Discriminative Power
+![Model Metrics Comparison](figures/model_metrics_comparison.png)
+
+#### ROC Curves & Confusion Matrix Breakdown
+<p align="center">
+  <img src="figures/roc_curves_comparison.png" alt="ROC Curves" width="48%" />
+  <img src="figures/confusion_matrices.png" alt="Confusion Matrices" width="48%" />
+</p>
+
+---
+
+### 🔍 Feature Importance & Econometric Drivers
+
+Analysis of Logistic Regression odds ratios alongside tree split gains highlights the decisive role of financial institution access:
+
+![Feature Importance Comparison](figures/feature_importance.png)
+
 ---
 
 ## 🗂️ Repository Structure
@@ -49,6 +68,11 @@ All models were evaluated on an unseen stratified hold-out test set ($n = 955$, 
 ```text
 ├── 13_master_household_ml_dataset.csv   # Aggregated GHS Wave 5 household dataset (4,771 × 42)
 ├── app.py                              # Interactive Streamlit Web Application
+├── figures/                            # High-resolution benchmark & evaluation plots
+│   ├── model_metrics_comparison.png
+│   ├── roc_curves_comparison.png
+│   ├── confusion_matrices.png
+│   └── feature_importance.png
 ├── eda_savings_nigeria.ipynb           # Exploratory Data Analysis & feature discovery
 ├── model_development_nigeria.ipynb     # Pipeline, model training, cross-validation & evaluation
 ├── model_evaluation_metrics.csv        # Benchmark metrics across candidate models
