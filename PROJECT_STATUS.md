@@ -25,29 +25,35 @@
     - Identified highly skewed numerical variables (earnings, asset values) requiring transformation.
     - Identified features for removal (e.g., `hhid`, duplicate indicators).
 
-## Pending Roadmap (Next Steps)
+## Roadmap & Completion Status
 
-### Phase 1: Data Preprocessing
-- [ ] **Handle Missing Values:** Apply median imputation for numericals and mode for categoricals.
-- [ ] **Feature Transformation:** Apply log transformations to highly skewed variables (earnings, asset values).
-- [ ] **Categorical Encoding:** Implement One-Hot Encoding for nominal variables (e.g., State, Geopolitical Zone).
-- [ ] **Feature Scaling:** Apply `StandardScaler` to numerical features to ensure model convergence.
+### Phase 1: Data Preprocessing (COMPLETED)
+- [x] **Handle Missing Values:** Applied median imputation for numericals and mode for categoricals.
+- [x] **Feature Transformation:** Applied log transformations (`log1p`) to highly skewed variables (earnings, asset values, household size).
+- [x] **Categorical Encoding:** Implemented One-Hot Encoding for nominal variables (`zone_code`, `urban_rural_code`, `head_sex_code`).
+- [x] **Feature Scaling:** Applied `StandardScaler` strictly fitted on training data to prevent leakage.
 
-### Phase 2: Model Development
-- [ ] **Train/Test Split:** Perform a stratified split to maintain target class proportions.
-- [ ] **Model Implementation:** Train the following models:
+### Phase 2: Model Development (COMPLETED)
+- [x] **Train/Test Split:** Performed stratified 80/20 train/test split maintaining target class proportions.
+- [x] **Model Implementation:** Trained four candidate models:
     - Logistic Regression (Baseline)
-    - Decision Tree
-    - Random Forest
-    - XGBoost / Gradient Boosting
-- [ ] **Evaluation:** Compare models using Accuracy, Precision, Recall, F1-score, and ROC-AUC.
+    - Decision Tree Classifier
+    - Random Forest Classifier
+    - XGBoost Classifier
+- [x] **Cross-Validation & Evaluation:** Conducted 5-Fold Stratified CV and hold-out test evaluation using Accuracy, Precision, Recall, F1-score, and ROC-AUC.
 
-### Phase 3: Analysis & Conclusion
-- [ ] **Feature Importance:** Identify and analyze the most influential predictors.
-- [ ] **Financial Inclusion Insights:** Discuss findings in the context of financial access and inclusion in Nigeria.
-- [ ] **Final Report:** Document the entire pipeline and results.
+### Phase 3: Analysis & Conclusion (COMPLETED)
+- [x] **Feature Importance:** Analyzed Logistic Regression odds ratios, Random Forest Gini importance, and XGBoost Gain importance.
+- [x] **Financial Inclusion Insights:** Evaluated institutional proximity (`any_bank_access`, `any_assisted_banking`, `any_mobile_money_access`) and regional divides.
+- [x] **Final Report:** Documented end-to-end technical methodology and policy recommendations in `FINAL_REPORT.md`.
 
-## Critical Files
-- `13_master_household_ml_dataset.csv`: The master feature set.
-- `eda_savings_nigeria.ipynb`: The a-priori analysis used to guide preprocessing.
-- `model_development_nigeria.ipynb`: End-to-end preprocessing, model training, cross-validation, evaluation, and feature importance.
+## Deliverables & Critical Files
+- `13_master_household_ml_dataset.csv`: Master household feature set.
+- `eda_savings_nigeria.ipynb`: Exploratory data analysis notebook.
+- `model_development_nigeria.ipynb`: Preprocessing, model training, cross-validation, and evaluation notebook.
+- `model_evaluation_metrics.csv`: Test set performance metrics across all models.
+- `model_feature_importances.csv`: Coefficients, odds ratios, and tree feature importances.
+- `FINAL_REPORT.md`: Comprehensive academic project report and policy recommendations.
+- `app.py`: Interactive Streamlit Web Application (Simulator & Real-Time Household Predictor).
+
+
