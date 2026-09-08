@@ -1,4 +1,4 @@
-# 🇳🇬 Predicting Household Savings Behavior in Nigeria
+# Predicting Household Savings Behavior in Nigeria
 
 [![Python](https://img.shields.io/badge/Python-3.9%20%7C%203.12-blue.svg)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.35%2B-FF4B4B.svg)](https://streamlit.io/)
