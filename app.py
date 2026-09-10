@@ -188,7 +188,7 @@ data_dict = train_and_cache_models()
 # -------------------------------------------------------------
 st.sidebar.image("https://upload.wikimedia.org/wikipedia/commons/7/79/Flag_of_Nigeria.svg", width=60)
 st.sidebar.title("CSC 572 ML Project")
-st.sidebar.markdown("**Household Savings in Nigeria**\n*GHS Wave 5 Microdata*")
+st.sidebar.markdown("**Household Savings in Nigeria**\n*GHS-Panel Wave 5 (2023/2024)*")
 st.sidebar.markdown("---")
 
 app_mode = st.sidebar.radio(
@@ -500,7 +500,7 @@ elif app_mode == "📈 Feature Importance & Insights":
 # -------------------------------------------------------------
 elif app_mode == "📁 Dataset & Survey Overview":
     st.markdown('<div class="main-header">📁 Dataset & Survey Overview</div>', unsafe_allow_html=True)
-    st.markdown('<div class="sub-header">Nigeria General Household Survey (GHS Wave 5) Microdata.</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sub-header">Nigeria General Household Survey, Panel Wave 5 (2023/2024) Microdata (NBS / World Bank).</div>', unsafe_allow_html=True)
     
     df = data_dict['df']
     

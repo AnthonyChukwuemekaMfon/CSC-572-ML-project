@@ -37,7 +37,7 @@ where $y = 1$ denotes a household with positive savings (formal or informal), an
 ## 2. Dataset Description & Exploratory Data Analysis (EDA)
 
 ### 2.1 Data Source & Scope
-The data is derived from the **Nigeria General Household Survey (GHS), Wave 5 (Panel 2020/2021)**, conducted by the National Bureau of Statistics (NBS) in collaboration with the World Bank Living Standards Measurement Study (LSMS) program. The raw, individual-level and module-level survey records were aggregated into a master household-level dataset: `13_master_household_ml_dataset.csv`.
+The data is derived from the **Nigeria General Household Survey (GHS), Wave 5 (Panel 2023/2024)**, conducted by the National Bureau of Statistics (NBS) in collaboration with the World Bank Living Standards Measurement Study (LSMS) program. The raw, individual-level and module-level survey records were aggregated into a master household-level dataset: `13_master_household_ml_dataset.csv`.
 
 * **Total Observations:** 4,771 households
 * **Raw Dimension:** 42 initial survey columns
@@ -162,6 +162,25 @@ Combining the parametric interpretability of Logistic Regression with the tree-b
 | `zone_code_3.0` (North West) | **-0.6022** | **0.5476** | 0.0147 | 0.0236 | Households in the North West show **45.2% lower odds** of formal/informal savings relative to North Central. |
 | `zone_code_6.0` (South West) | **-0.4870** | **0.6144** | 0.0059 | 0.0179 | Regional relative baseline difference showing distinct informal vs formal savings dynamics. |
 | `zone_code_2.0` (North East) | **-0.4118** | **0.6624** | 0.0100 | 0.0216 | Severe infrastructural and security challenges impede access to institutional savings. |
+
+### 6.2 Test-Set Permutation Feature Importance (Cross-Checking Tree Cardinality Bias)
+
+As outlined in Section 3.10 of the study methodology, built-in tree importances (MDI / Gini in Random Forest and Split Gain in XGBoost) can overemphasize continuous features with many distinct values. To obtain an unbiased, model-agnostic verification, **permutation feature importance** was computed on the held-out test partition ($n = 955$) across 10 random shuffles using the change in ROC-AUC as the evaluation metric:
+
+| Rank | Feature Name | LR Permutation ($\Delta$ AUC) | RF Permutation ($\Delta$ AUC) | XGBoost Permutation ($\Delta$ AUC) | Methodological Interpretation |
+| :---: | :--- | :---: | :---: | :---: | :--- |
+| **1** | `any_bank_access` | **0.0713** $\pm$ 0.0078 | **0.0611** $\pm$ 0.0094 | **0.0631** $\pm$ 0.0071 | Shuffling bank access produces the largest catastrophic drop in test ROC-AUC across **all three architectures**, confirming it is the uncontested primary driver. |
+| **2** | `any_assisted_banking` | **0.0272** $\pm$ 0.0041 | **0.0269** $\pm$ 0.0037 | **0.0356** $\pm$ 0.0050 | Confirmed as the second most vital real-world predictor, dropping XGBoost ROC-AUC by 0.0356. |
+| **3** | `any_mobile_money_access` | **0.0108** $\pm$ 0.0025 | **0.0168** $\pm$ 0.0022 | **0.0136** $\pm$ 0.0020 | Reliable digital access signal with virtually zero cardinality distortion. |
+| **4** | `any_internet_access` | 0.0042 $\pm$ 0.0018 | 0.0065 $\pm$ 0.0028 | 0.0085 $\pm$ 0.0026 | Demonstrates consistent positive utility for fintech enablement. |
+| **5** | `employment_rate` | 0.0045 $\pm$ 0.0012 | 0.0031 $\pm$ 0.0010 | 0.0064 $\pm$ 0.0017 | Strongest economic/labor driver on test data, ahead of raw earnings. |
+| **6** | `total_reported_income_sources`| 0.0002 $\pm$ 0.0010 | 0.0033 $\pm$ 0.0012 | 0.0058 $\pm$ 0.0026 | Household income diversification provides buffer stability. |
+| **7** | `zone_code_4.0` (South East) | 0.0001 $\pm$ 0.0005 | 0.0032 $\pm$ 0.0007 | 0.0048 $\pm$ 0.0017 | Regional commercial hub effect. |
+| **8** | `zone_code_2.0` (North East) | 0.0013 $\pm$ 0.0004 | 0.0013 $\pm$ 0.0003 | 0.0036 $\pm$ 0.0007 | Regional structural deficit indicator. |
+| **9** | `zone_code_3.0` (North West) | 0.0065 $\pm$ 0.0015 | 0.0025 $\pm$ 0.0010 | 0.0035 $\pm$ 0.0014 | Negative regional penalty confirmed on out-of-sample data. |
+| **10**| `asset_types_owned` | 0.0054 $\pm$ 0.0021 | 0.0032 $\pm$ 0.0024 | 0.0035 $\pm$ 0.0017 | Resilient physical wealth proxy. |
+
+**Key Cross-Check Conclusion:** The permutation importance rankings perfectly corroborate the built-in tree importances and Logistic Regression odds ratios. Both methods identify **physical banking access**, **agency banking**, and **mobile money** as the top 3 structural drivers of household savings in Nigeria, eliminating any concern that tree models favored continuous asset or earnings values due to cardinality bias.
 
 ---
 

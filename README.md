@@ -7,7 +7,7 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 **CSC 572 – Machine Learning Course Project**  
-**Dataset:** Nigeria General Household Survey (GHS), Wave 5 (4,771 Households)  
+**Dataset:** Nigeria General Household Survey (GHS), Panel Wave 5 (2023/2024) (4,771 Households)  
 **Target:** Binary Classification (`savings_target`: 1 = Has Savings, 0 = No Savings)  
 
 ---
@@ -16,7 +16,7 @@
 
 Promoting household savings is a foundational pillar for poverty alleviation, economic resilience, and financial inclusion across Sub-Saharan Africa. In Nigeria, despite ongoing regulatory initiatives by the **Central Bank of Nigeria (CBN)** under the **National Financial Inclusion Strategy (NFIS)**, significant gaps in formal and informal savings adoption persist across socio-demographic classes and geopolitical regions.
 
-This project develops an end-to-end, leak-free supervised machine learning pipeline to model and predict household savings behavior using microdata from the **Nigeria General Household Survey (GHS Wave 5)** conducted by the National Bureau of Statistics (NBS) and the World Bank. 
+This project develops an end-to-end, leak-free supervised machine learning pipeline to model and predict household savings behavior using microdata from the **Nigeria General Household Survey, Panel Wave 5 (2023/2024)** conducted by the National Bureau of Statistics (NBS) and the World Bank. 
 
 We benchmark four machine learning models—**Logistic Regression**, **Decision Tree**, **Random Forest**, and **XGBoost**—and package the resulting models into an interactive **Streamlit web application** featuring a real-time household savings predictor and a policy simulation dashboard.
 
