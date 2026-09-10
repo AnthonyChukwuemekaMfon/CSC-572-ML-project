@@ -6,7 +6,7 @@
 **Target Variable:** `savings_target` (0 = No savings, 1 = Has savings).
 
 ## Current State
-- **Data Source:** Nigeria General Household Survey, Wave 5.
+- **Data Source:** Nigeria General Household Survey, Panel Wave 5 (2023/2024) (National Bureau of Statistics / World Bank).
 - **Current Dataset:** `13_master_household_ml_dataset.csv` (4,771 households × 42 columns).
 - **Completed Work:** 
     - Raw Stata files converted to CSV and aggregated to household level.
